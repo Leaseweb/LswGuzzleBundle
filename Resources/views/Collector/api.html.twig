@@ -59,7 +59,7 @@
                           <a href="data:text/plain;,{{ call.requestRaw|url_encode(true) }}">request</a> ({{ call.requestRaw|length}} bytes)
                           <a href="data:text/plain;,{{ call.responseRaw|url_encode(true) }}">response</a> ({{ call.responseRaw|length}} bytes)
                           <br />
-                        <strong>Description:</strong>:
+                        <strong>Description</strong>:
                           <code>
                           {% if call.parameterCount %}
 							{{ call.clientName }}-&gt;{{ call.operationName }}(<a href="data:text/plain;,{{ call.requestDescription|url_encode(true) }}">{{ call.parameterCount }} parameters</a>)  
