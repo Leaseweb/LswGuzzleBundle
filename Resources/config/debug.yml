@@ -1,0 +1,16 @@
+parameters:
+    lsw_guzzle.history_plugin.class: Lsw\GuzzleBundle\Plugin\HistoryPlugin
+    lsw_guzzle.data_collector.class: Lsw\GuzzleBundle\DataCollector\ApiCallDataCollector
+    lsw_guzzle.data_collector.template: LswGuzzleBundle:Collector:api
+
+services:
+    lsw_guzzle.history_plugin:
+        class: %lsw_guzzle.history_plugin.class%
+        calls: 
+            - [setLimit, [100]]
+            
+    lsw_guzzle.data_collector:
+        class: %lsw_guzzle.data_collector.class%
+        arguments: [@lsw_guzzle.history_plugin]
+        tags:
+            - { name: data_collector, template: %lsw_guzzle.data_collector.template%, id:"api"}

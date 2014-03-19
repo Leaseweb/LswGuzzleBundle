@@ -1,0 +1,86 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img width="22" height="28" alt="API" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAcCAYAAABlL09dAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90DGg4mOhU8H+YAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACjElEQVRIx+2Wz08TURDHP+/ttlssrZhgWw5gOBhOFCImkJgmHjwgKIkJxIN/AgFjCCZgTI3Gv0Dj3YuGGAU1YOLFRA9E4Aht8KAeEBIbgaVsMW23z4Ow2napP6o3JtnDzNv5ZuY7M28eHMiuiOGhIbm1sXnaNM0Ou1DIVwOmlBKHg8FsbaD2vr7+Zb3O3Nx4aVkZTQhRdaSWZdHkadJkW3tbAIQmhOBffaFIuEtKTfvn/Pp8NZquUG5cAaBrGkLK/Qglb9sopSilUCmldDdQpRThSISenh4CgYArbqFgs7CwwNzbOVdw3c3pSF0dY+NjtEajFVM+29vL7Zu3mJ2dLTsry1MIwYX+flqjUZLJJFdHR8qc9uw+n4+xa+MYXq9DnyuwUgpd1xm4OADAdnqLxcXFMuCf7Yf8fs739ZHL5fYHLhRsjre04PV49+Lfp3jF9lOxGLadrxQxRMJhR8/nc2yn02WwpfZQ6CiFQgUqhIAt03T0Ex0nmZh4BEAmY5FKpQCItrXz+MmU859pmmVdUQQspUYiseTohmEQaWjAsixGR0aIxWK8W17G7/dTX1/vFGx+fgG9ZNBkaUfs7HxlZnq6qKez2Sxra2sArKysOGdCCHL5HM+fPUX3eH7dxxMPHtIajdLY2AhAMBjkejxOeivt9PZe6vfu3CX1OYUsKbLr5H1aXeVGPM7g4CDh3WKGQmFCoTAZyyJjWeTzNlOTk7yYnsHtVtTdBgTg4/sPXBm+XNb4Rc4eHSm13wP+UUiJ1zD++oaTqP+xmBT6d9JVxZT/cD0hpJT6sebmnTPd3SSXltCkVmWcCo/uobOrMylevXntNQwjXuPznRNSZqtdzrZt5xKJxKWDd4oj3wARYAMtKR6xuAAAAABJRU5ErkJggg==" />
+        <span class="sf-toolbar-status{% if 5 < collector.callcount %} sf-toolbar-status-yellow{% endif %}">{{ collector.callcount }}</span>
+        {% if collector.callcount > 0 %}
+            <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+        {% endif %}
+        {% if collector.returnedErrorCount > 0 %}
+            <span class="sf-toolbar-info-piece-additional sf-toolbar-status sf-toolbar-status-red"> </span>
+        {% endif %}
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>API Calls</b>
+            <span>{{ collector.callcount }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Total time</b>
+            <span>{{ '%0.2f'|format(collector.time * 1000) }} ms</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Errors</b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.returnedErrorCount > 0 ? 'red' : 'green' }}">{{ collector.returnedErrorCount }}</span>
+        </div>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+<span class="label">
+    <span class="icon">
+      <img width="32" height="33" alt="API" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAYAAAC4JqlRAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90DGRciClbL3V8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC9klEQVRYw+2Xv08TYRjHv8/dvZeUhspw59AfiWy1JEpSwQUHdTCiiUZkN62jQBxJHBzVwRDUKCI6mBD5B5zUxFR+FIOUFZfCIkh7oS2ltL3e60Bai70rV0JoTHiTm+7uuc/7PN/n+7xHgwMD91bj8afFos6ICEe1iIC2E20fqf9Wn65pmogmLckolcRdImoKgIAmr2OApgNI9lqG4Ha7IdgUKgeQTCaRzWYhCMLBATjnyOVyGHk2imAw2FCnpNNp3B8cwko8DkEUD1YCURAwPvEGXV1dICLbFwC4XC68Gn8Nt8cDwzAaBygWi+jrv41ARwc453t2zzm3zFi1p8iyjNEXz5HP71i+Iwb8/oc7+XzNB1T1JB49eVwJqOs6AoEABAK6u89basXv92M7u4WengvgnMPhcIAxGUuxmGkJLTMQCofMRSPtr9vyM0QEzjkuXr4EmTH7JWCSBP9pv2XaGhs6BK/XC6fTaRrPFEBiDIqqHup8ONN5FqVSyR4AEcHpdB6q4ZxqbzftBksA65zWNxbR4n3GGGBSAsm8nQwUCgXIsvw3sCgiEolYZqbcql+/ReBwtNTcX1tbB5m4oul2SnoJyURyj2iICKqqoqVlN7imaQiH7qD36hV8+fyponhFUU0hFxcWIJo4oilAoVjE6upK3VKMjb1EbHERG783MDQ4ULd0mqYhkUjY9wHOOaY+TNV1vbVf60CV9WYyGUtnXIrFUCgU7AMQEaJzc5ifi1ZS+++SmQRZlsEYg8yY6aQsf3B0ZMRyI9R34ybfTKVq6DjncLla8X5yslL36mcSiQR2crnK+PV4PHtGb1mUD4aHMT09Y+mgQj0HS6XSuBsOYyuTqQFUFAVenw9enw8+n69m7huGgXcTbzE7M1vXvi0zUB3I5WpF77XrECV7p3fOge/RKH4uL4MEoa6Y9wUop1PX9YacTxTFfU9DDR3JmMU0Oz4V//8AzfonLItb6DwX5M2A2B1cCmj+x8KEqqihowYgAjZTqe0//VcdSxbB1vAAAAAASUVORK5CYII=" />
+    </span>
+    <strong>API CALLS</strong>
+    <span class="count">
+        <span>{{ collector.callcount }}</span>
+        <span>{{ '%0.0f'|format(collector.time * 1000) }} ms</span>
+    </span>
+</span>
+{% endblock %}
+
+{% block panel %}
+    <h2>API Calls</h2>
+
+    {% if not collector.callcount %}
+        <p>
+            <em>No calls.</em>
+        </p>
+    {% else %}
+        <ul class="alt">
+            {% for i, call in collector.calls %}
+                <li class="{{ i is odd ? 'odd' : 'even' }}">
+                    <div>
+                        <strong>Status</strong>: {{ call.status }}<br />
+                        <strong>URL</strong>: {{ call.url }}<br />
+                        <strong>Raw</strong>:
+                          <a href="data:text/plain;,{{ call.requestRaw|url_encode(true) }}">request</a> ({{ call.requestRaw|length}} bytes)
+                          <a href="data:text/plain;,{{ call.responseRaw|url_encode(true) }}">response</a> ({{ call.responseRaw|length}} bytes)
+                          <br />
+                        <strong>Description:</strong>:
+                          <code>
+                          {% if call.parameterCount %}
+							{{ call.clientName }}-&gt;{{ call.operationName }}(<a href="data:text/plain;,{{ call.requestDescription|url_encode(true) }}">{{ call.parameterCount }} parameters</a>)  
+                          {% else %}
+                            {{ call.clientName }}-&gt;{{ call.operationName }}()
+                          {% endif %}
+                          </code>
+                          <br />
+                        <strong>Parsed</strong>:
+                          {% if call.parameterCount %}
+							<a href="data:text/plain;,{{ call.requestParameters|url_encode(true) }}">parameters</a>
+                          {% endif %}
+                          <a href="data:{{ call.responseType }};,{{ call.responseObject|url_encode(true) }}">output</a>
+                          <br />
+                    </div>
+                    <small>
+                        <strong>Time</strong>: {{ '%0.2f'|format(call.time * 1000) }} ms
+                    </small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
