@@ -8,23 +8,23 @@ use Guzzle\Http\Message\RequestInterface as GuzzleRequestInterface;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Lsw\GuzzleBundle\Plugin\HistoryPlugin;
+use Lsw\GuzzleBundle\Plugin\CommandHistoryPlugin;
 
 /**
- * ApiCallDataCollector
+ * GuzzleDataCollector
  *
  * @author Maurits van der Schee <m.vanderschee@leaseweb.com>
  */
-class ApiCallDataCollector extends DataCollector
+class GuzzleDataCollector extends DataCollector
 {
     private $history;
 
     /**
      * Class constructor
      *
-     * @param ApiCallLoggerInterface $logger Logger object
+     * @param CommandHistoryPlugin $history history object
      */
-    public function __construct(HistoryPlugin $history)
+    public function __construct(CommandHistoryPlugin $history)
     {
         $this->history = $history;
     }
@@ -45,21 +45,31 @@ class ApiCallDataCollector extends DataCollector
     	foreach ($this->history as $command) {
     		$request = $command->getRequest();
 			
-    		$response = $request->getResponse();
-			$time = $response->getInfo('total_time');
-			$error = $response->isError();
-			 
-			$result = $command->getResult();
-			$responseType = 'text/plain';
+   			$response = $request->getResponse();
+   		    $time = $response->getInfo('total_time');
+		    $error = $response->isError();
+    		
+    		try {
+    			
+				$result = $command->getResult();
+				$responseType = 'text/plain';
 			
-        	if (is_array($result)) {
-        		$result = Yaml::dump($result); 
-        	} else if (is_a($result,'Guzzle\Http\Message\Response')) {
-        		$result = $response->getBody(true);
-        		$responseType = $response->getContentType();
-        	} else {
-        		$result=(string)$command->getResult();
+	        	if (is_array($result) || is_object($result)) {
+	        		$result = Yaml::dump($result); 
+	        	} else if (is_a($result,'Guzzle\Http\Message\Response')) {
+	        		$result = $response->getBody(true);
+	        		$responseType = $response->getContentType();
+	        	} else {
+	        		$result=(string)$command->getResult();
+	        	}
+        	
+        	} catch (\Exception $e) {
+        		
+        		$result = '';
+        		$responseType = '';
+        	
         	}
+        	 
         	
         	$status = $response->getStatusCode().' '.$response->getReasonPhrase();
         	
@@ -158,6 +168,6 @@ class ApiCallDataCollector extends DataCollector
      */
     public function getName()
     {
-        return 'api';
+        return 'guzzle';
     }
 }

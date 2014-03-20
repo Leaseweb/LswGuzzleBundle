@@ -2,7 +2,7 @@
 
 {% block toolbar %}
     {% set icon %}
-        <img width="22" height="28" alt="API" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAcCAYAAABlL09dAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90DGg4mOhU8H+YAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACjElEQVRIx+2Wz08TURDHP+/ttlssrZhgWw5gOBhOFCImkJgmHjwgKIkJxIN/AgFjCCZgTI3Gv0Dj3YuGGAU1YOLFRA9E4Aht8KAeEBIbgaVsMW23z4Ow2napP6o3JtnDzNv5ZuY7M28eHMiuiOGhIbm1sXnaNM0Ou1DIVwOmlBKHg8FsbaD2vr7+Zb3O3Nx4aVkZTQhRdaSWZdHkadJkW3tbAIQmhOBffaFIuEtKTfvn/Pp8NZquUG5cAaBrGkLK/Qglb9sopSilUCmldDdQpRThSISenh4CgYArbqFgs7CwwNzbOVdw3c3pSF0dY+NjtEajFVM+29vL7Zu3mJ2dLTsry1MIwYX+flqjUZLJJFdHR8qc9uw+n4+xa+MYXq9DnyuwUgpd1xm4OADAdnqLxcXFMuCf7Yf8fs739ZHL5fYHLhRsjre04PV49+Lfp3jF9lOxGLadrxQxRMJhR8/nc2yn02WwpfZQ6CiFQgUqhIAt03T0Ex0nmZh4BEAmY5FKpQCItrXz+MmU859pmmVdUQQspUYiseTohmEQaWjAsixGR0aIxWK8W17G7/dTX1/vFGx+fgG9ZNBkaUfs7HxlZnq6qKez2Sxra2sArKysOGdCCHL5HM+fPUX3eH7dxxMPHtIajdLY2AhAMBjkejxOeivt9PZe6vfu3CX1OYUsKbLr5H1aXeVGPM7g4CDh3WKGQmFCoTAZyyJjWeTzNlOTk7yYnsHtVtTdBgTg4/sPXBm+XNb4Rc4eHSm13wP+UUiJ1zD++oaTqP+xmBT6d9JVxZT/cD0hpJT6sebmnTPd3SSXltCkVmWcCo/uobOrMylevXntNQwjXuPznRNSZqtdzrZt5xKJxKWDd4oj3wARYAMtKR6xuAAAAABJRU5ErkJggg==" />
+        <img width="22" height="28" alt="Guzzle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAcCAYAAABlL09dAAAAAXNSR0IArs4c6QAAAAZiS0dEAEQAQQBCvbqCvQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94DFBccLLH96awAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAACS0lEQVRIx+2WzW8SQRjGn9llye6WNRzAsLGlTaUH9cCXDXCw1qRqSbySlJCelfqB9W6qxmi81z/Ag9HgSb1oS/+BaoUaCD2sN7Cn1uKyQBB2vcgmCzRBlmOfZA7PZOY3b9555wM40T8RANRyfHm+Kv8KtlS1ZQamAeSUIDTZsbFXllgsZj+qHGwoSo0mhJiOtKbUMD4xTlNer1cACE0Iwaiay+UKW1iWPXZ1lmVx+co8vF4v3G43bIKAdrsNWZZROTqCJEnYK+7hy/a2cR7H05bjoP6AHzeTSQiCYOhnGAYsy8LpdMIzM4PFaBSJpbhhjKqpWl/wxdlZ3H+wik7OZVnGu3QaO1938LtSAcdxEEUR5y6cRzgS6RtYD9hms+HWSlKHNptNPH38BKVSSR+jKAokSYIkSfj4/kNfMNXdsXDtKjiO0/3Gp88G6KDqAft8PoPv3pihwS5RNPhyuTwUuCfHPM8bfKPRMPjXb9/0BXVXBtV7cpSeWh5JKn7u7xu82JWaxFK8J7qBwLlvWYMPBIOjiTizuQmlWtX99egiHA6HeXCtVsPL9XWoqqpv5sNHawhHwuB5HgzD4KzH8/9VAQC7uV28ePYcyTu3Ybfb4XA4cDeVMlduHeXzeazeS+HS3Bz8AT8mp6YgCAIoikKjXsfB4SHKpTJ+SBJy2ezg4M49sZXJYCuTGfaAaNA0bSRvnaZpIIRQltPT0/UFqxXFQgE0RZuDQgNjYRAKhYoknU5bz0xOrHEcf4MQ0jT5MpOWqv75ni8kTv4puv4CUfC7AZPA+OUAAAAASUVORK5CYII=" />
         <span class="sf-toolbar-status{% if 5 < collector.callcount %} sf-toolbar-status-yellow{% endif %}">{{ collector.callcount }}</span>
         {% if collector.callcount > 0 %}
             <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.time * 1000) }} ms</span>
@@ -31,9 +31,9 @@
 {% block menu %}
 <span class="label">
     <span class="icon">
-      <img width="32" height="33" alt="API" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAYAAAC4JqlRAAAAAXNSR0IArs4c6QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB90DGRciClbL3V8AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC9klEQVRYw+2Xv08TYRjHv8/dvZeUhspw59AfiWy1JEpSwQUHdTCiiUZkN62jQBxJHBzVwRDUKCI6mBD5B5zUxFR+FIOUFZfCIkh7oS2ltL3e60Bai70rV0JoTHiTm+7uuc/7PN/n+7xHgwMD91bj8afFos6ICEe1iIC2E20fqf9Wn65pmogmLckolcRdImoKgIAmr2OApgNI9lqG4Ha7IdgUKgeQTCaRzWYhCMLBATjnyOVyGHk2imAw2FCnpNNp3B8cwko8DkEUD1YCURAwPvEGXV1dICLbFwC4XC68Gn8Nt8cDwzAaBygWi+jrv41ARwc453t2zzm3zFi1p8iyjNEXz5HP71i+Iwb8/oc7+XzNB1T1JB49eVwJqOs6AoEABAK6u89basXv92M7u4WengvgnMPhcIAxGUuxmGkJLTMQCofMRSPtr9vyM0QEzjkuXr4EmTH7JWCSBP9pv2XaGhs6BK/XC6fTaRrPFEBiDIqqHup8ONN5FqVSyR4AEcHpdB6q4ZxqbzftBksA65zWNxbR4n3GGGBSAsm8nQwUCgXIsvw3sCgiEolYZqbcql+/ReBwtNTcX1tbB5m4oul2SnoJyURyj2iICKqqoqVlN7imaQiH7qD36hV8+fyponhFUU0hFxcWIJo4oilAoVjE6upK3VKMjb1EbHERG783MDQ4ULd0mqYhkUjY9wHOOaY+TNV1vbVf60CV9WYyGUtnXIrFUCgU7AMQEaJzc5ifi1ZS+++SmQRZlsEYg8yY6aQsf3B0ZMRyI9R34ybfTKVq6DjncLla8X5yslL36mcSiQR2crnK+PV4PHtGb1mUD4aHMT09Y+mgQj0HS6XSuBsOYyuTqQFUFAVenw9enw8+n69m7huGgXcTbzE7M1vXvi0zUB3I5WpF77XrECV7p3fOge/RKH4uL4MEoa6Y9wUop1PX9YacTxTFfU9DDR3JmMU0Oz4V//8AzfonLItb6DwX5M2A2B1cCmj+x8KEqqihowYgAjZTqe0//VcdSxbB1vAAAAAASUVORK5CYII=" />
+      <img width="32" height="33" alt="Guzzle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAhCAYAAAC4JqlRAAAAAXNSR0IArs4c6QAAAAZiS0dEAEQAQQBCvbqCvQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94DFBcYLaKWHD4AAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAC4ElEQVRYw8VXy08TcRD+FtgAZfuiCwQxxR5gaU2A0F4skghRLy3RSEw0HnzcUHr1EYwR8ew/gODJaMpFQDjBAUt8pEDUZFsTDqVLKxikW+jCLo92PRhO3UpbaTvHyczO95v5dvIN4XK5+laWl1/s7x+QBEEgX0YQgE6rnSKuXuk5iEQixSiQlSTi8eK/iIiCAChCga3gAEoyTWhobIDZYgHDMKiuqQFFUVCpVEgkEpAkCTzP49faGoLLQfzw+7G0tIR4PJ6ajD2XLsvRzc0jOXC2owMOpwPG+vqMAAuCgM8fP+HVyEh2HdBotei924vmlpasWkxRFM5fvJAdAJ1ej4HBZ6BpOv8cKC0txf2HD1IWD4fCmJmeht/nw8bGBkRRhEqlgk6nwymTCU1mM2w2K9QaTXYAHN1O1CvMO5FIYNTtxsTYOGRZTpq3IAgIhUKY83gwPETAarPB2e3MDABFUXA4lZNG3W6MvxtLq72yLGPe68W815vZHmiztqGsrCzJ/zMcTrv4fy2i5pZWxeCZ6Zn8bEKj0agY7Pf78/MXaDRqxeDf6+uK/tdv36RV7Ma16+l1QFVRofgBURTzM4Kd7W3FYCVi5gTA1lZMMdiQg42oyAGO41B3si7JzzAMVjjuyNmmy4mUHfj+7ati8LmuzvyMYHFhUZFwJpMJnV1duQcgCAKmJicVE27evgV7e3vuJdnkxHtwwWCSnyRJ3HP14VF/P+ztdtA0DZIkQZIkKg2VOGO3ZybP/6WI9Ho9Bp4PwmAwHMtr015Eh8bzPJ70PwbLsjkTJMWWpqan0u5uSk0oSRLmPB7wfAS1tSegVqszKhCLxfBhdhYjQy8RjUazF6WHx4vZYoHltAWNDIMqmkYFRaG8vBx7e3sQRRF8JILV1VVwQQ4+lkUgEEgSLlnLclmW4WNZ+I5xJIW/jAp1Ex52tKjVZpULAUKWZdA0DeLLwsJwdVXVnXwDIAiAj0Z3/gAdjQlOvQRNAgAAAABJRU5ErkJggg==" />
     </span>
-    <strong>API CALLS</strong>
+    <strong>GUZZLE</strong>
     <span class="count">
         <span>{{ collector.callcount }}</span>
         <span>{{ '%0.0f'|format(collector.time * 1000) }} ms</span>
@@ -72,7 +72,9 @@
                           {% if call.parameterCount %}
 							<a href="data:text/plain;,{{ call.requestParameters|url_encode(true) }}">parameters</a>
                           {% endif %}
-                          <a href="data:{{ call.responseType }};,{{ call.responseObject|url_encode(true) }}">output</a>
+                          {% if call.responseType %}
+						 	<a href="data:{{ call.responseType }};,{{ call.responseObject|url_encode(true) }}">output</a>
+                          {% endif %}
                           <br />
                     </div>
                     <small>
