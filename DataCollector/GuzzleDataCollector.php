@@ -49,7 +49,7 @@ class GuzzleDataCollector extends DataCollector
    		    $time = $response->getInfo('total_time');
 		    $error = $response->isError();
     		
-    		try {
+		    if (!$error) {
     			
 				$result = $command->getResult();
 				$responseType = 'text/plain';
@@ -63,7 +63,7 @@ class GuzzleDataCollector extends DataCollector
 	        		$result=(string)$command->getResult();
 	        	}
         	
-        	} catch (\Exception $e) {
+        	} else {
         		
         		$result = '';
         		$responseType = '';
