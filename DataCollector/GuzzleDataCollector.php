@@ -53,9 +53,9 @@ class GuzzleDataCollector extends DataCollector
     			
 				$result = $command->getResult();
 				$responseType = 'text/plain';
-			
-	        	if (is_array($result) || is_object($result)) {
-	        		$result = Yaml::dump($result); 
+				
+	        	if (is_array($result) || is_a($result,'stdClass')) {
+	        		$result = Yaml::dump(json_decode(json_encode($result),true));
 	        	} else if (is_a($result,'Guzzle\Http\Message\Response')) {
 	        		$result = $response->getBody(true);
 	        		$responseType = $response->getContentType();

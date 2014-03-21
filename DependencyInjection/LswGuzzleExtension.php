@@ -25,6 +25,7 @@ class LswGuzzleExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('config.yml');
         if ($container->getParameter('kernel.debug')) {
             $loader->load('debug.yml');
         }
@@ -76,6 +77,7 @@ class LswGuzzleExtension extends Extension
         $client->setFactoryMethod('factory');
         $client->addArgument($config['config']);
         $client->addMethodCall('setDescription', array(new Reference($serviceName)));
+        $client->addMethodCall('addSubscriber',array(new Reference('lsw_guzzle.json_bug_plugin')));
         if ($container->hasDefinition('lsw_guzzle.command_history_plugin')) {
         	$client->addMethodCall('addSubscriber',array(new Reference('lsw_guzzle.command_history_plugin')));
         }

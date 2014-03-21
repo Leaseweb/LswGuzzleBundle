@@ -1,0 +1,6 @@
+parameters:
+    lsw_guzzle.json_bug_plugin.class: Lsw\GuzzleBundle\Plugin\JsonBugPlugin
+
+services:
+    lsw_guzzle.json_bug_plugin:
+        class: %lsw_guzzle.json_bug_plugin.class%
