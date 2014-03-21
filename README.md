@@ -7,6 +7,7 @@ lsw_guzzle:
     clients:
         test:
             config:
+                json_objects: true
                 curl.options:
                     CURLOPT_CONNECTTIMEOUT: 10
                     CURLOPT_SSL_VERIFYPEER: false
