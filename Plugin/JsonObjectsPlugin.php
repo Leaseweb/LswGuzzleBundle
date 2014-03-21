@@ -8,9 +8,9 @@ use Guzzle\Common\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Fixes bug in Guzzle
+ * Support JSON objects as return value in Guzzle
  */
-class JsonBugPlugin implements EventSubscriberInterface
+class JsonObjectsPlugin implements EventSubscriberInterface
 {
 	private $body;
 	
