@@ -26,7 +26,6 @@ class JsonBugPlugin implements EventSubscriberInterface
 		if (!$response || !$response->isContentType('json')) return;
 		$this->body = $response->getBody(true);
 		$command->setResult($this->json());
-		echo 'a';	
 	}
 	
 	public function json()
