@@ -1,7 +1,7 @@
 LswGuzzleBundle
 ===============
 
-![screenshot](http://www.leaseweblabs.com/wp-content/uploads/2013/01/api_caller.png)
+![screenshot](http://www.leaseweblabs.com/wp-content/uploads/2014/03/guzzle_bundle.png)
 
 The LswGuzzleBundle adds Guzzle API call functionality to your Symfony2 application.
 It is easy to use from the code and is aimed to have full debugging capabilities.
