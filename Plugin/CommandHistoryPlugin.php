@@ -6,6 +6,7 @@ use Guzzle\Service\Command\CommandInterface;
 
 use Guzzle\Common\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Guzzle\Http\Message\RequestInterface;
 
 /**
  * Maintains a list of commands sent using a client
@@ -17,19 +18,24 @@ class CommandHistoryPlugin implements EventSubscriberInterface, \IteratorAggrega
 
 	public static function getSubscribedEvents()
 	{
-		return array('command.before_send' => array('onCommandBeforeSent', 9999));
+		return array(
+			'command.before_send' => array('onCommandBeforeSent', 9999),
+			'request.sent' => array('onRequestSent', 9999),
+		);
 	}
 
 	/**
 	 * Add a request to the history
 	 *
+	 * @param RequestInterface $request Request to add
 	 * @param CommandInterface $command Command to add
 	 *
 	 * @return CommandHistoryPlugin
 	 */
-	public function add(CommandInterface $command)
+	public function add(RequestInterface $request, CommandInterface $command = null)
 	{
-		$this->transactions[] = $command;
+		$key = spl_object_hash($request);
+		$this->transactions[$key] = array('request' => $request, 'command' => $command);
 		
 		return $this;
 	}
@@ -56,7 +62,13 @@ class CommandHistoryPlugin implements EventSubscriberInterface, \IteratorAggrega
 	
 	public function onCommandBeforeSent(Event $event)
 	{
-		$this->add($event['command']);
+		$request = $event['command']->getRequest();
+		$this->add($request, $event['command']);
+	}
+	
+	public function onRequestSent(Event $event)
+	{
+		$this->add($event['request']);
 	}
 	
 }

@@ -42,14 +42,15 @@ class GuzzleDataCollector extends DataCollector
     			'time'   => 0,
     	);
     	
-    	foreach ($this->history as $command) {
-    		$request = $command->getRequest();
-			
+    	foreach ($this->history as $event) {
+    		$command = $event['command'];
+    		$request = $event['request'];
+    		
    			$response = $request->getResponse();
    		    $time = $response->getInfo('total_time');
 		    $error = $response->isError();
     		
-		    if (!$error) {
+		    if ($command && !$error) {
     			
 				$result = $command->getResult();
 				$responseType = 'text/plain';
@@ -81,18 +82,27 @@ class GuzzleDataCollector extends DataCollector
         		(string)$request->getQuery()?'?...':''
         	));
         	
-        	$parameters = $command->toArray();
-        	$hidden = $parameters[AbstractCommand::HIDDEN_PARAMS];
-        	$parameters = array_diff_key($parameters, array_combine($hidden,$hidden));
-        	$parameterCount = count($parameters);
-        	$requestParameters = Yaml::dump($parameters);
+        	if ($command) {
+	        	$parameters = $command->toArray();
+	        	$hidden = $parameters[AbstractCommand::HIDDEN_PARAMS];
+	        	$parameters = array_diff_key($parameters, array_combine($hidden,$hidden));
+	        	$parameterCount = count($parameters);
+	        	$requestParameters = Yaml::dump($parameters);
+	        	
+	        	$parameters = $command->getOperation()->getParams();
+	        	$requestDescription = Yaml::dump(array_map(function($p){ return $p->toArray(); }, $parameters));
+	        	
+	        	$operationName = $command->getName();
+	        	$clientName = $command->getClient()->getDescription()->getName();
+        	} else {
+        		$parameterCount = 0;
+        		$requestParameters = false;
+        		$parameters = array();
+        		$requestDescription = false;
+        		$operationName = strtolower($request->getMethod());
+        		$clientName = $request->getClient()->getDescription()->getName();
+        	}
         	
-        	$parameters = $command->getOperation()->getParams();
-        	$requestDescription = Yaml::dump(array_map(function($p){ return $p->toArray(); }, $parameters));
-        	
-        	$operationName = $command->getName();
-        	$clientName = $command->getClient()->getDescription()->getName();
-        	 
     		$data['calls'][] = array(
 				'url'			     => $url,
     			'status'		     => $status,
