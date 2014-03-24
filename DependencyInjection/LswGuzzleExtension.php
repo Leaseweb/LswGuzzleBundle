@@ -83,6 +83,11 @@ class LswGuzzleExtension extends Extension
         if ($container->hasDefinition('lsw_guzzle.command_history_plugin')) {
         	$client->addMethodCall('addSubscriber',array(new Reference('lsw_guzzle.command_history_plugin')));
         }
+
+        if ($container->getParameter('kernel.debug')) {
+            $client->addMethodCall('addSubscriber', array(new Reference('lsw_guzzle.log_plugin')));
+        }
+
         // Add the service to the container
         $serviceName = sprintf('guzzle.%s', $name);
         $container->setDefinition($serviceName, $client);
