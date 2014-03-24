@@ -90,9 +90,6 @@ It should display that the option "cURL support" is set to "enabled".
 This package should work on a Windows installation as well provided the CURL support
 is enabled in PHP.
 
-
-```
-
 ## Configuration
 
 These is an example of Guzzle client based on a service description (including cURL options):
