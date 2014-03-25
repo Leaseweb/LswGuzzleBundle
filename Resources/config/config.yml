@@ -1,6 +1,19 @@
 parameters:
     lsw_guzzle.json_objects_plugin.class: Lsw\GuzzleBundle\Plugin\JsonObjectsPlugin
+    lsw_guzzle.monolog_adapter.class: Guzzle\Log\MonologLogAdapter
+    lsw_guzzle.log_plugin.class: Guzzle\Plugin\Log\LogPlugin
+    lsw_guzzle.message_format: "API call \"{method} {url}\" returned \"{code}\" in {total_time} seconds sending {res_header_content-length} bytes"
 
 services:
     lsw_guzzle.json_objects_plugin:
         class: %lsw_guzzle.json_objects_plugin.class%
+
+    lsw_guzzle.monolog_adapter:
+        class: %lsw_guzzle.monolog_adapter.class%
+        arguments: [@logger]
+        tags:
+            - { name: monolog.logger, channel: guzzle }
+
+    lsw_guzzle.log_plugin:
+        class: %lsw_guzzle.log_plugin.class%
+        arguments: [@lsw_guzzle.monolog_adapter,%lsw_guzzle.message_format%]

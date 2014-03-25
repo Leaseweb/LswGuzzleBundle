@@ -1,10 +1,7 @@
 parameters:
-    lsw_guzzle.monolog_adapter.class: Guzzle\Log\MonologLogAdapter
-    lsw_guzzle.log_plugin.class: Guzzle\Plugin\Log\LogPlugin
     lsw_guzzle.command_history_plugin.class: Lsw\GuzzleBundle\Plugin\CommandHistoryPlugin
     lsw_guzzle.data_collector.class: Lsw\GuzzleBundle\DataCollector\GuzzleDataCollector
     lsw_guzzle.data_collector.template: LswGuzzleBundle:Collector:guzzle
-    lsw_guzzle.message_format: "\n>>>>>>>>\n{request}\n<<<<<<<<\n{response}\n--------\n{curl_stderr}"
 
 services:
     lsw_guzzle.command_history_plugin:
@@ -15,11 +12,3 @@ services:
         arguments: [@lsw_guzzle.command_history_plugin]
         tags:
             - { name: data_collector, template: %lsw_guzzle.data_collector.template%, id:"guzzle"}
-
-    lsw_guzzle.monolog_adapter:
-        class: %lsw_guzzle.monolog_adapter.class%
-        arguments: [@logger]
-
-    lsw_guzzle.log_plugin:
-        class: %lsw_guzzle.log_plugin.class%
-        arguments: [@lsw_guzzle.monolog_adapter, %lsw_guzzle.message_format%]

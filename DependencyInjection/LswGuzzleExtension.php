@@ -77,15 +77,12 @@ class LswGuzzleExtension extends Extension
         $client->setFactoryMethod('factory');
         $client->addArgument($config['config']);
         $client->addMethodCall('setDescription', array(new Reference($serviceName)));
+        $client->addMethodCall('addSubscriber', array(new Reference('lsw_guzzle.log_plugin')));
         if (isset($config['config']['json_objects']) && $config['config']['json_objects']) {
         	$client->addMethodCall('addSubscriber',array(new Reference('lsw_guzzle.json_objects_plugin')));
         }
         if ($container->hasDefinition('lsw_guzzle.command_history_plugin')) {
         	$client->addMethodCall('addSubscriber',array(new Reference('lsw_guzzle.command_history_plugin')));
-        }
-
-        if ($container->getParameter('kernel.debug')) {
-            $client->addMethodCall('addSubscriber', array(new Reference('lsw_guzzle.log_plugin')));
         }
 
         // Add the service to the container
