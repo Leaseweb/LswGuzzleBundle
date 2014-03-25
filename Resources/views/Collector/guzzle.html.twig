@@ -61,10 +61,12 @@
                           <br />
                         <strong>Description</strong>:
                           <code>
-                          {% if call.parameterCount %}
+                          {% if call.parameterCount>0 %}
 							{{ call.clientName }}-&gt;{{ call.operationName }}(<a href="data:text/plain;,{{ call.requestDescription|url_encode(true) }}">{{ call.parameterCount }} parameters</a>)  
-                          {% else %}
+                          {% elseif call.parameterCount==0 %}
                             {{ call.clientName }}-&gt;{{ call.operationName }}()
+                          {% else %}
+                            {{ call.clientName }}-&gt;{{ call.operationName }}(...)
                           {% endif %}
                           </code>
                           <br />

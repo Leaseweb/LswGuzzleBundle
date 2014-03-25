@@ -95,7 +95,7 @@ class GuzzleDataCollector extends DataCollector
 	        	$operationName = $command->getName();
 	        	$clientName = $command->getClient()->getDescription()->getName();
         	} else {
-        		$parameterCount = 0;
+        		$parameterCount = -1;
         		$requestParameters = false;
         		$parameters = array();
         		$requestDescription = false;

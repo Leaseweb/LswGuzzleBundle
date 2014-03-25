@@ -20,7 +20,7 @@ class CommandHistoryPlugin implements EventSubscriberInterface, \IteratorAggrega
 	{
 		return array(
 			'command.before_send' => array('onCommandBeforeSent', 9999),
-			'request.sent' => array('onRequestSent', 9999),
+			'request.sent' => array('onRequestSent', 9999),	
 		);
 	}
 
@@ -35,7 +35,17 @@ class CommandHistoryPlugin implements EventSubscriberInterface, \IteratorAggrega
 	public function add(RequestInterface $request, CommandInterface $command = null)
 	{
 		$key = spl_object_hash($request);
-		$this->transactions[$key] = array('request' => $request, 'command' => $command);
+		if (!key_exists($key, $this->transactions)) {
+			$this->transactions[$key] = array(
+				'request'=>null,
+				'command'=>null,
+			);
+		}		
+		
+		$this->transactions[$key]['request'] = $request;
+		if ($command) {
+			$this->transactions[$key]['command'] = $command;
+		}
 		
 		return $this;
 	}
