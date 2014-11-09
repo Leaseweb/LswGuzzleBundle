@@ -130,7 +130,7 @@ lsw_guzzle:
 
 ## Usage
 
-This is how to consume the descibed service commands:
+This is how to consume the described service commands:
 
 ```
     	$response = $this->get('guzzle.test')->getCommand('test')->execute();
