@@ -8,7 +8,7 @@ It is easy to use from the code and is aimed to have full debugging capabilities
 
 [Read the LeaseWebLabs blog about LswGuzzleBundle](http://www.leaseweblabs.com/2014/03/guzzle-symfony2-bundle-curl-api-calling/)
 
-[Read the Guzzle documentation](http://guzzle.readthedocs.org/en/latest/docs.html)
+[Read the Guzzle documentation](http://docs.guzzlephp.org/en/stable/)
 
 [Guzzle API documentation](http://api.guzzlephp.org/)
 
