@@ -27,21 +27,10 @@ Installation is broken down in the following steps:
 
 ### Step 1: Download LswGuzzleBundle using composer
 
-Add LswGuzzleBundle in your composer.json:
-
-```js
-{
-    "require": {
-        "leaseweb/guzzle-bundle": "*",
-        ...
-    }
-}
-```
-
-Now tell composer to download the bundle by running the command:
+Tell composer to download the bundle by running the command:
 
 ``` bash
-$ php composer.phar update leaseweb/guzzle-bundle
+$ composer require leaseweb/guzzle-bundle
 ```
 
 Composer will install the bundle to your project's `vendor/leaseweb` directory.
