@@ -5,10 +5,10 @@ parameters:
 
 services:
     lsw_guzzle.command_history_plugin:
-        class: %lsw_guzzle.command_history_plugin.class%
+        class: "%lsw_guzzle.command_history_plugin.class%"
             
     lsw_guzzle.data_collector:
-        class: %lsw_guzzle.data_collector.class%
-        arguments: [@lsw_guzzle.command_history_plugin]
+        class: "%lsw_guzzle.data_collector.class%"
+        arguments: ["@lsw_guzzle.command_history_plugin"]
         tags:
-            - { name: data_collector, template: %lsw_guzzle.data_collector.template%, id:"guzzle"}
+            - { name: "data_collector", template: "%lsw_guzzle.data_collector.template%", id: "guzzle"}
